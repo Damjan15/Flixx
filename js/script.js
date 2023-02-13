@@ -117,6 +117,10 @@ async function displayMovieDetails() {
   const movieId = window.location.search.split("=")[1];
 
   const movie = await fetchAPIData(`movie/${movieId}`);
+
+  // Overlay for background image
+  displayBackgroundImage('movie', movie.backdrop_path);
+
   const div = document.createElement("div");
   div.innerHTML = `
     <div class="details-top">
@@ -166,6 +170,29 @@ async function displayMovieDetails() {
     `;
 
     document.querySelector('#movie-details').appendChild(div);
+}
+
+// Display backdrop image on details page
+function displayBackgroundImage(type, backgroundPath) {
+    const overlayDiv = document.createElement("div");
+    overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backgroundPath})`;
+
+    overlayDiv.style.backgroundSize = "cover";
+    overlayDiv.style.backgroundPosition = "center";
+    overlayDiv.style.backgroundRepeat = "no-repeat";
+    overlayDiv.style.height = "100vh";
+    overlayDiv.style.width = "100vw";
+    overlayDiv.style.position = "absolute";
+    overlayDiv.style.top = "0";
+    overlayDiv.style.left = "0";
+    overlayDiv.style.zIndex = "-1";
+    overlayDiv.style.opacity = "0.1";
+
+    if (type === 'movie') {
+        document.querySelector('#movie-details').appendChild(overlayDiv);
+    } else {
+        document.querySelector("#show-details").appendChild(overlayDiv);
+    }
 }
 
 // Init App
