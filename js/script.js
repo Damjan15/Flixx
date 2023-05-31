@@ -1,0 +1,1 @@
+console.log(import.meta.env.VITE_MOVIE_DB_API_KEY);
