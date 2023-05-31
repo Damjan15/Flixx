@@ -18,9 +18,6 @@ function init() {
         case "/tv-details.html":
             displayShowDetails();
             break;
-        case "/search.html":
-            console.log("Search Page");
-            break;
         default:
             break;
     }
